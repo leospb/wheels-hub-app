@@ -13,39 +13,51 @@ interface OffersListProps {
 
 const MOCK_OFFERS = [
   {
+    manufacturer: 'Michelin',
+    model: 'Pilot Sport 4 S',
+    flag: '🇫🇷',
+    photo: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=128&h=128&fit=crop',
     store: 'Колесо.ру',
     price: '9 450',
     oldPrice: '11 200 ₽',
-    stock: 'В наличии (от 4 шт.)',
+    stock: 'В наличии (>4)',
     delivery: 'Завтра',
-    logo: 'K',
     featured: true,
   },
   {
+    manufacturer: 'Pirelli',
+    model: 'P Zero PZ4',
+    flag: '🇮🇹',
+    photo: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=128&h=128&fit=crop',
     store: 'Шинсервис',
     price: '9 680',
     oldPrice: null,
     stock: 'Под заказ (2-3 дня)',
-    delivery: 'Пт, 27 октября',
-    logo: 'Ш',
+    delivery: '27 октября',
     featured: false,
   },
   {
+    manufacturer: 'Continental',
+    model: 'PremiumContact 7',
+    flag: '🇩🇪',
+    photo: 'https://images.unsplash.com/photo-1520626027585-64906f9d2d8e?w=128&h=128&fit=crop',
     store: 'Vianor',
     price: '9 900',
     oldPrice: '10 500 ₽',
     stock: 'Осталось 2 шт.',
     delivery: 'Сегодня',
-    logo: 'V',
     featured: false,
   },
   {
+    manufacturer: 'Hankook',
+    model: 'Ventus S1 evo3',
+    flag: '🇰🇷',
+    photo: 'https://images.unsplash.com/photo-1620063251214-727de9eecfb8?w=128&h=128&fit=crop',
     store: 'Эксклюзив',
     price: '10 150',
     oldPrice: null,
-    stock: 'В наличии (много)',
+    stock: 'В наличии',
     delivery: 'Завтра',
-    logo: 'E',
     featured: false,
   }
 ];
@@ -127,74 +139,74 @@ export default function OffersList({ customSpec }: OffersListProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className={`group relative flex items-center justify-between p-4 px-5 rounded-2xl border transition-all duration-300 ${
+                  className={`group relative flex items-center justify-between py-3 px-4 rounded-xl border transition-all duration-300 ${
                     offer.featured 
-                      ? 'bg-blue-50 dark:bg-[#0f172a] border-cyan-500/30' 
+                      ? 'bg-blue-50/50 dark:bg-[#0f172a] border-cyan-500/30' 
                       : 'bg-white dark:bg-[#0f172a]/50 border-slate-200 dark:border-slate-800'
                   }`}
                 >
                   {offer.featured && (
-                    <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-blue-500 text-[10px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5 shadow-lg shadow-blue-500/20">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      Лучшая цена
+                    <div className="absolute -top-2.5 left-4 px-2 py-0.5 rounded-full bg-blue-500 text-[9px] font-bold text-white uppercase tracking-wider flex items-center gap-1 shadow-md shadow-blue-500/20">
+                      <ShieldCheck className="w-3 h-3" />
+                      Выбор профи
                     </div>
                   )}
                   
-                  {/* Левая часть: Лого + Инфо */}
-                  <div className="flex items-center gap-5">
-                    <div className={`w-14 h-14 flex items-center justify-center rounded-xl font-black text-2xl ${
-                      offer.featured ? 'bg-cyan-100 dark:bg-[#5bc2dc] text-cyan-900 dark:text-slate-900' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300'
-                    }`}>
-                      {offer.logo}
-                    </div>
+                  {/* Левая часть: Фото + Инфо */}
+                  <div className="flex items-center gap-4">
+                    <img 
+                      src={offer.photo} 
+                      alt={offer.model}
+                      className="w-12 h-12 object-cover rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm"
+                    />
                     
                     <div className="flex flex-col justify-center">
-                      <h4 className="text-[17px] font-bold text-slate-900 dark:text-slate-100 leading-tight mb-1.5">{offer.store}</h4>
+                      <h4 className="text-[15px] font-bold text-slate-900 dark:text-slate-100 leading-tight mb-1 flex items-center gap-2">
+                        {offer.manufacturer} {offer.model}
+                        <span className="text-[14px]" title="Страна бренда">{offer.flag}</span>
+                      </h4>
                       
-                      <div className="flex items-center gap-4 text-[12px]">
-                        <span className={`flex items-center gap-1.5 ${offer.stock.includes('В наличии') ? 'text-emerald-400' : 'text-amber-400'}`}>
-                          <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
+                      <div className="flex items-center gap-3 text-[11px]">
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{offer.store}</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                        <span className={`flex items-center gap-1 ${offer.stock.includes('наличии') ? 'text-emerald-500 dark:text-emerald-400' : 'text-amber-500 dark:text-amber-400'}`}>
                           {offer.stock}
                         </span>
-                        
-                        <div className="w-px h-6 bg-slate-200 dark:bg-slate-700"></div>
-                        
-                        <span className="text-slate-500 dark:text-slate-400 flex flex-col leading-tight">
-                          <span>Доставка:</span>
-                          <span>{offer.delivery}</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
+                        <span className="text-slate-500 dark:text-slate-400 hidden sm:flex items-center gap-1">
+                          Доставка: <span className="font-medium text-slate-700 dark:text-slate-300">{offer.delivery}</span>
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Правая часть: Цена + Кнопка */}
-                  <div className="flex items-center gap-6">
-                    <div className="flex flex-col items-end justify-center min-w-[90px]">
+                  {/* Правая часть: Цена + Кнопка-иконка */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex flex-col items-end justify-center min-w-[70px]">
                       {offer.oldPrice ? (
-                        <div className="text-[11px] text-slate-500 line-through mb-0.5 font-mono tracking-tight relative">
+                        <div className="text-[10px] text-slate-400 line-through mb-0 font-mono tracking-tight h-[14px]">
                           {offer.oldPrice}
                         </div>
                       ) : (
-                        <div className="h-[16px]"></div>
+                        <div className="h-[14px]"></div>
                       )}
                       
                       <div className="flex items-baseline gap-1 whitespace-nowrap">
-                        <span className={`text-[26px] font-black font-mono tracking-tighter ${offer.featured ? 'text-cyan-600 dark:text-[#5bc2dc]' : 'text-slate-800 dark:text-slate-100'}`}>
+                        <span className={`text-[20px] font-black font-mono tracking-tighter ${offer.featured ? 'text-cyan-600 dark:text-[#5bc2dc]' : 'text-slate-800 dark:text-slate-100'}`}>
                           {offer.price}
                         </span>
-                        <span className={`text-[18px] font-bold ${offer.featured ? 'text-cyan-600 dark:text-[#5bc2dc]' : 'text-slate-800 dark:text-slate-100'}`}>
+                        <span className={`text-[14px] font-bold ${offer.featured ? 'text-cyan-600 dark:text-[#5bc2dc]' : 'text-slate-800 dark:text-slate-100'}`}>
                           ₽
                         </span>
                       </div>
                     </div>
                     
-                    <button className={`w-[90px] h-12 flex flex-col items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-200 leading-[1.2] ${
+                    <button className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-200 shrink-0 ${
                       offer.featured 
                         ? 'bg-cyan-500 dark:bg-[#5bc2dc] hover:bg-cyan-400 dark:hover:bg-[#4ab1cb] text-white dark:text-slate-900 shadow-md shadow-cyan-500/20' 
-                        : 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-cyan-600 dark:text-cyan-400 border border-slate-200 dark:border-slate-700 hover:border-cyan-200'
                     }`}>
-                      <span>В</span>
-                      <span>корзину</span>
+                      <ShoppingCart className="w-4 h-4 stroke-[2.5]" />
                     </button>
                   </div>
                 </motion.div>
