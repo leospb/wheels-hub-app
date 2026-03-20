@@ -3,6 +3,7 @@
 import React from 'react';
 import { ShoppingCart, Star } from 'lucide-react';
 import { GlowingCard } from '@/components/ui/glowing-card';
+import Link from 'next/link';
 
 export interface TireProduct {
   id: string;
@@ -24,7 +25,7 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
     return (
       <GlowingCard className="w-full flex group relative overflow-visible" contentClassName="p-0 flex flex-col sm:flex-row w-full h-full">
         {/* Изображение */}
-        <div className="relative w-full sm:w-48 h-48 bg-slate-100 dark:bg-slate-800/40 rounded-t-[1.3rem] sm:rounded-l-[1.3rem] sm:rounded-tr-none overflow-hidden flex shrink-0 items-center justify-center p-4">
+        <Link href={`/tires/${product.id}`} className="relative w-full sm:w-48 h-48 bg-slate-100 dark:bg-slate-800/40 rounded-t-[1.3rem] sm:rounded-l-[1.3rem] sm:rounded-tr-none overflow-hidden flex shrink-0 items-center justify-center p-4 cursor-pointer">
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-cyan-500/5 dark:to-cyan-500/10 pointer-events-none"></div>
           <img 
             src={product.photo} 
@@ -36,7 +37,7 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
               <span className="text-[8px] font-black text-white uppercase tracking-wider">Хит</span>
             </div>
           )}
-        </div>
+        </Link>
 
         {/* Контент */}
         <div className="flex flex-col sm:flex-row flex-grow justify-between p-5 border-l border-transparent sm:border-slate-100 dark:sm:border-slate-800/60">
@@ -47,10 +48,12 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
                 <span className="text-sm" title="Страна бренда">{product.flag}</span>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider line-clamp-1">{product.category}</span>
               </div>
-              <h3 className="text-[19px] font-black text-slate-900 dark:text-white leading-tight mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                <span className="font-medium mr-1">{product.manufacturer}</span>
-                {product.model}
-              </h3>
+              <Link href={`/tires/${product.id}`} className="hover:underline decoration-cyan-500 cursor-pointer">
+                <h3 className="text-[19px] font-black text-slate-900 dark:text-white leading-tight mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                  <span className="font-medium mr-1">{product.manufacturer}</span>
+                  {product.model}
+                </h3>
+              </Link>
               <div className="inline-block px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded mb-4 self-start">
                 <span className="text-[11px] font-mono font-medium text-slate-600 dark:text-slate-400">
                   {product.specs}
@@ -89,7 +92,7 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
     <GlowingCard className="h-full flex flex-col group relative" contentClassName="p-0 flex flex-col h-full">
       
       {/* ── Изображение и бейджи ── */}
-      <div className="relative w-full aspect-square bg-slate-100 dark:bg-slate-800/40 rounded-t-[1.3rem] overflow-hidden flex items-center justify-center p-6">
+      <Link href={`/tires/${product.id}`} className="relative w-full aspect-square bg-slate-100 dark:bg-slate-800/40 rounded-t-[1.3rem] overflow-hidden flex items-center justify-center p-6 cursor-pointer">
         {/* Subtle radial glow behind tire */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-cyan-500/5 dark:to-cyan-500/10 pointer-events-none"></div>
         <div className="absolute inset-0 flex items-center justify-center">
@@ -111,7 +114,7 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
         <div className="absolute top-4 right-4 z-20 flex flex-col gap-1 items-end">
           <span className="text-xl" title="Страна бренда">{product.flag}</span>
         </div>
-      </div>
+      </Link>
 
       {/* ── Информация ── */}
       <div className="flex flex-col flex-grow p-5 border-t border-slate-100 dark:border-slate-800/60">
@@ -127,10 +130,12 @@ export default function TireCard({ product, view = 'grid' }: { product: TireProd
         </div>
 
         {/* Название */}
-        <h3 className="text-[17px] font-black text-slate-900 dark:text-white leading-tight mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-          <span className="font-medium mr-1">{product.manufacturer}</span>
-          {product.model}
-        </h3>
+        <Link href={`/tires/${product.id}`} className="hover:underline decoration-cyan-500 cursor-pointer">
+          <h3 className="text-[17px] font-black text-slate-900 dark:text-white leading-tight mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+            <span className="font-medium mr-1">{product.manufacturer}</span>
+            {product.model}
+          </h3>
+        </Link>
 
         {/* Спецификация (размер) */}
         <div className="inline-block px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded mb-auto self-start">
