@@ -185,7 +185,7 @@ export default function SvgRenderer({ currentSpecs, newSpecs, highlightedSize }:
           {/* Rim Width far right grouping */}
           <motion.line animate={{ x1: newCx - newRimW/2, x2: newCx + newRimW/2, y1: 860, y2: 860 }} stroke={LINE_COLOR} strokeWidth="1.5" markerStart="url(#arrow-left)" markerEnd="url(#arrow-right)" transition={{ type: "spring" }} />
           <motion.line animate={{ x1: newCx + newRimW/2, x2: 840, y1: 860, y2: 860 }} stroke="#bbb" strokeWidth="1" strokeDasharray="3 4" transition={{ type: "spring" }} />
-          <motion.text animate={{ x: 860, y: 760 }} textAnchor="center" transition={{ type: "spring" }}>
+          <motion.text animate={{ x: 860, y: 760 }} textAnchor="middle" transition={{ type: "spring" }}>
             <tspan x="860" dy="0">Rim width</tspan>
             <tspan x="860" dy="25">{Math.round(newRimW)} mm</tspan>
           </motion.text>
