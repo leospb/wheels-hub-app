@@ -1,0 +1,39 @@
+/* globals.css — WheelsHub Design System */
+@import "tailwindcss";
+
+/* Переменные темы */
+:root {
+  --color-bg-primary: #0a0c18;
+  --color-bg-secondary: #0d1020;
+  --color-bg-card: rgba(16, 20, 40, 0.7);
+  --color-border: rgba(50, 60, 100, 0.4);
+  --color-accent-cyan: #00d4aa;
+  --color-accent-blue: #4a9eff;
+  --color-accent-purple: #8060ff;
+  --color-text-primary: #e8eaf6;
+  --color-text-secondary: #7a84a8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(74, 158, 255, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 212, 170, 0.04) 0%, transparent 50%);
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(10, 12, 24, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(74, 158, 255, 0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(74, 158, 255, 0.5); }

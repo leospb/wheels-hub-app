@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -12,11 +9,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #f8fafc; /* slate-50 equivalent */
+  --foreground: #0f172a; /* slate-900 equivalent */
+}
+
+.dark {
+  --background: #0a0e1f;
+  --foreground: #e2e8f0; /* slate-200 equivalent */
 }
 
 body {
