@@ -6,7 +6,7 @@ import type { WheelSpec } from '@/utils/wheelMath';
 import SvgRenderer from '@/components/Calculator/SvgRenderer';
 import ParametersForm from '@/components/Calculator/ParametersForm';
 import PlusSizingTable from '@/components/Calculator/PlusSizingTable';
-import { Calculator, LayoutGrid, Briefcase, ShoppingCart, User, HelpCircle, Bell, Mail, BarChart2, Settings } from 'lucide-react';
+import { Calculator, LayoutGrid, Briefcase, ShoppingCart, User, HelpCircle, Bell, Mail, BarChart2, Settings, CircleDashed, Aperture, Hexagon } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { UserDropdown } from '@/components/ui/user-dropdown';
 import { CitySelector } from '@/components/ui/city-selector';
@@ -169,9 +169,9 @@ export default function FitmentCalculator() {
 
   const navItems = [
     { name: "Калькулятор", link: "#calculator", icon: <Calculator className="w-4 h-4" /> },
-    { name: "Каталог", link: "#catalog", icon: <LayoutGrid className="w-4 h-4" /> },
-    { name: "B2B", link: "#b2b", icon: <Briefcase className="w-4 h-4" /> },
-    { name: "Корзина", link: "#cart", icon: <ShoppingCart className="w-4 h-4" /> },
+    { name: "Шины", link: "#tires", icon: <CircleDashed className="w-4 h-4" /> },
+    { name: "Диски", link: "#wheels", icon: <Aperture className="w-4 h-4" /> },
+    { name: "Болты", link: "#bolts", icon: <Hexagon className="w-4 h-4" /> },
   ];
 
   return (
@@ -181,8 +181,12 @@ export default function FitmentCalculator() {
         logo={<div className="scale-[0.8] origin-left"><Logo /></div>}
         navItems={navItems}
         actionButton={
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="hidden md:block"><CitySelector /></div>
+            <a href="#cart" className="relative text-slate-600 dark:text-slate-400 hover:text-cyan-600 transition-colors p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full flex items-center justify-center">
+              <ShoppingCart className="w-[1.2rem] h-[1.2rem]" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-cyan-500 rounded-full"></span>
+            </a>
             <ThemeToggle />
             <UserDropdown />
           </div>
