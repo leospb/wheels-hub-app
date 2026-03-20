@@ -1,6 +1,7 @@
 import React from 'react';
 import TireFilters from '@/components/Catalog/TireFilters';
 import TireCatalog from '@/components/Catalog/TireCatalog';
+import TireSizeTopBar from '@/components/Catalog/TireSizeTopBar';
 
 export const metadata = {
   title: 'Купить шины — Каталог и актуальные цены | WheelsHub',
@@ -21,8 +22,11 @@ export default function TiresAggregatorPage() {
         </p>
       </div>
       
+      {/* ── Top Bar with Sliders ── */}
+      <TireSizeTopBar />
+
       {/* ── Layout Grid ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 items-start relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 items-start relative z-10 pt-4">
         
         {/* Sidebar */}
         <aside className="lg:col-span-1 xl:col-span-1 hidden lg:block sticky top-32">

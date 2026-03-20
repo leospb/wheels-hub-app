@@ -76,40 +76,18 @@ export default function TireFilters() {
 
       <div className="w-full h-px bg-slate-100 dark:bg-slate-800/80"></div>
 
-      {/* ── Параметры ── */}
+      {/* ── Похожие размеры (Plus Sizing) ── */}
       <div className="flex flex-col gap-3">
-        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Параметры</label>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-400 px-1">Ширина</span>
-            <select className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-2 text-sm text-slate-700 dark:text-slate-200 outline-none focus:border-cyan-500">
-              <option>Любая</option>
-              <option>205</option>
-              <option>225</option>
-              <option>245</option>
-              <option>275</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-400 px-1">Профиль</span>
-            <select className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-2 text-sm text-slate-700 dark:text-slate-200 outline-none focus:border-cyan-500">
-              <option>Любой</option>
-              <option>35</option>
-              <option>40</option>
-              <option>45</option>
-              <option>50</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-400 px-1">Диаметр</span>
-            <select className="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-2 text-sm text-slate-700 dark:text-slate-200 outline-none focus:border-cyan-500">
-              <option>Любой</option>
-              <option>R17</option>
-              <option>R18</option>
-              <option>R19</option>
-              <option>R20</option>
-            </select>
-          </div>
+        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Похожие размеры</label>
+        <div className="flex flex-wrap gap-2">
+          {['235/40 R18', '245/35 R19', '255/35 R19', '225/45 R18', '205/50 R17'].map((size, idx) => (
+            <button 
+              key={idx}
+              className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-400 text-[11px] font-mono font-medium text-slate-600 dark:text-slate-300 transition-colors"
+            >
+              {size}
+            </button>
+          ))}
         </div>
       </div>
 
