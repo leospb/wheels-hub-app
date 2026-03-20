@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { SearchAnimatedButton } from '@/components/ui/search-animated-button';
 
 export default function TireSizeTopBar() {
   const [width, setWidth] = useState(245);
@@ -10,7 +11,8 @@ export default function TireSizeTopBar() {
   return (
     <div className="w-full relative z-20">
       <div className="p-6 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0f172a]/80 shadow-sm backdrop-blur-xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex flex-col lg:flex-row items-center gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 flex-1 w-full">
           
           {/* Ширина */}
           <div className="flex flex-col gap-4">
@@ -68,7 +70,11 @@ export default function TireSizeTopBar() {
               <span>R24</span>
             </div>
           </div>
-
+        </div>
+          
+        <div className="w-full lg:w-auto shrink-0 flex justify-end mt-6 lg:mt-0">
+           <SearchAnimatedButton className="w-full lg:w-[160px] h-full min-h-[48px]" />
+        </div>
         </div>
       </div>
     </div>
