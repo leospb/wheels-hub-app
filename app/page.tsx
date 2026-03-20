@@ -13,6 +13,7 @@ import { CitySelector } from '@/components/ui/city-selector';
 import OffersList from '@/components/Calculator/OffersList';
 import VehicleSelector from '@/components/Calculator/VehicleSelector';
 import { GlowingCard } from '@/components/ui/glowing-card';
+import { FloatingNav } from '@/components/ui/floating-navbar';
 
 // ─────────────────────────────────────────────
 // Блок результатов
@@ -166,57 +167,27 @@ function Logo() {
 export default function FitmentCalculator() {
   const { oeSpec, customSpec } = useCalculatorStore();
 
+  const navItems = [
+    { name: "Калькулятор", link: "#calculator", icon: <Calculator className="w-4 h-4" /> },
+    { name: "Каталог", link: "#catalog", icon: <LayoutGrid className="w-4 h-4" /> },
+    { name: "B2B", link: "#b2b", icon: <Briefcase className="w-4 h-4" /> },
+    { name: "Корзина", link: "#cart", icon: <ShoppingCart className="w-4 h-4" /> },
+  ];
+
   return (
     <div className="min-h-screen transition-colors duration-300 bg-slate-50 dark:bg-[#0a0e1f] text-slate-900 dark:text-slate-200">
-      {/* ── Шапка ── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800/50 bg-white/90 dark:bg-[#090c18]/92 backdrop-blur-md">
-        <div className="max-w-screen-2xl mx-auto px-6 h-14 flex items-center">
-          <Logo />
-
-          <div className="ml-8 mr-6 hidden md:block">
-            <CitySelector />
-          </div>
-
-          <nav className="flex items-center gap-6 mr-auto">
-            <a href="#calculator" className="flex items-center gap-2 text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              <Calculator className="w-4 h-4" />
-              <span>Калькулятор</span>
-            </a>
-            <a href="#catalog" className="flex items-center gap-2 text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              <LayoutGrid className="w-4 h-4" />
-              <span>Каталог</span>
-            </a>
-            <a href="#b2b" className="flex items-center gap-2 text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
-              <Briefcase className="w-4 h-4" />
-              <span>B2B</span>
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-5">
-            <nav className="flex items-center gap-5 text-slate-600 dark:text-slate-400 mr-2">
-              <button className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer text-[13px] font-medium">
-                <Bell className="w-4 h-4" />
-                <span className="hidden xl:inline">Уведомления</span>
-              </button>
-              <button className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer text-[13px] font-medium">
-                <ShoppingCart className="w-4 h-4" />
-                <span className="hidden xl:inline">Корзина</span>
-              </button>
-              <button className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer text-[13px] font-medium">
-                <Settings className="w-4 h-4" />
-                <span className="hidden xl:inline">Настройки</span>
-              </button>
-              <button className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer text-[13px] font-medium">
-                <HelpCircle className="w-4 h-4" />
-                <span className="hidden xl:inline">Помощь</span>
-              </button>
-            </nav>
-            <div className="w-px h-6 bg-slate-200 dark:bg-slate-800 mx-2"></div>
+      {/* ── Навигация ── */}
+      <FloatingNav 
+        logo={<div className="scale-[0.8] origin-left"><Logo /></div>}
+        navItems={navItems}
+        actionButton={
+          <div className="flex items-center gap-3">
+            <div className="hidden md:block"><CitySelector /></div>
             <ThemeToggle />
             <UserDropdown />
           </div>
-        </div>
-      </header>
+        }
+      />
 
       {/* ── Основной контент ── */}
       <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
