@@ -84,6 +84,30 @@ export default function TireFilters() {
 
       <div className="w-full h-px bg-slate-100 dark:bg-slate-800/80"></div>
 
+      {/* ── Страны-производители ── */}
+      <div className="flex flex-col gap-3">
+        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Страны-производители</label>
+        <div className="flex flex-col gap-2">
+          {countries.map((country, i) => (
+            <label key={i} className="flex items-center justify-between cursor-pointer group">
+              <div className="flex items-center gap-3">
+                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 group-hover:border-cyan-400`}>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">{country.flag}</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    {country.name}
+                  </span>
+                </div>
+              </div>
+              <span className="text-xs text-slate-400">{country.count}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="w-full h-px bg-slate-100 dark:bg-slate-800/80"></div>
+
       {/* ── Похожие размеры (Plus Sizing) ── */}
       <div className="flex flex-col gap-3">
         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Похожие размеры</label>
@@ -126,30 +150,6 @@ export default function TireFilters() {
         <button className="text-xs font-bold text-cyan-600 dark:text-cyan-400 mt-1 text-left hover:underline">
           Показать все бренды (48)
         </button>
-      </div>
-
-      <div className="w-full h-px bg-slate-100 dark:bg-slate-800/80"></div>
-
-      {/* ── Страны-производители ── */}
-      <div className="flex flex-col gap-3">
-        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Страны-производители</label>
-        <div className="flex flex-col gap-2">
-          {countries.map((country, i) => (
-            <label key={i} className="flex items-center justify-between cursor-pointer group">
-              <div className="flex items-center gap-3">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 group-hover:border-cyan-400`}>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm">{country.flag}</span>
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    {country.name}
-                  </span>
-                </div>
-              </div>
-              <span className="text-xs text-slate-400">{country.count}</span>
-            </label>
-          ))}
-        </div>
       </div>
 
     </div>
