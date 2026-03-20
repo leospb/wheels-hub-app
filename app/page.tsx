@@ -194,7 +194,7 @@ export default function FitmentCalculator() {
       />
 
       {/* ── Основной контент ── */}
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 pt-24 space-y-6">
 
         {/* ── Hero-строка ── */}
         <div className="flex items-center justify-between">
