@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Calculator, CircleDashed, Aperture, Hexagon, ShoppingCart } from 'lucide-react';
+import { Calculator, CircleDashed, Aperture, Hexagon, ShoppingCart, CarFront } from 'lucide-react';
 import { FloatingNav } from '@/components/ui/floating-navbar';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { UserDropdown } from '@/components/ui/user-dropdown';
@@ -40,6 +40,7 @@ function Logo() {
 
 export function SiteHeader() {
   const navItems = [
+    { name: "По марке", link: "/makes", icon: <CarFront className="w-4 h-4" /> },
     { name: "Калькулятор", link: "/", icon: <Calculator className="w-4 h-4" /> },
     { name: "Шины", link: "/tires", icon: <CircleDashed className="w-4 h-4" /> },
     { name: "Диски", link: "/wheels", icon: <Aperture className="w-4 h-4" /> },

@@ -2,46 +2,59 @@ import React from 'react';
 import TireFilters from '@/components/Catalog/TireFilters';
 import TireCatalog from '@/components/Catalog/TireCatalog';
 import TireSizeTopBar from '@/components/Catalog/TireSizeTopBar';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Купить шины — Каталог и актуальные цены | WheelsHub',
-  description: 'Агрегатор лучших предложений на шины. Сравните цены на летнюю и зимнюю резину.'
+  description: 'Агрегатор лучших предложений на шины. Сравните цены на летнюю и зимнюю резину.',
 };
 
 export default function TiresAggregatorPage() {
   return (
-    <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 pt-32 space-y-8 min-h-screen text-slate-900 dark:text-slate-200">
-      
-      {/* ── Heading ── */}
-      <div className="flex flex-col gap-2 relative z-10">
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
-          Каталог шин
-        </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base max-w-lg">
-          Умный агрегатор предложений. Находите лучшие цены от проверенных поставщиков с учетом доставки.
-        </p>
-      </div>
-      
-      {/* ── Top Bar with Sliders ── */}
-      <TireSizeTopBar />
+    <main className="min-h-screen bg-slate-50 dark:bg-[#020817] pt-24 pb-24 text-slate-900 dark:text-slate-200">
+      <div className="w-full md:w-[calc(100%-2rem)] max-w-screen-2xl mx-auto px-4 md:px-0">
 
-      {/* ── Layout Grid ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 items-start relative z-10 pt-4">
-        
-        {/* Sidebar */}
-        <aside className="lg:col-span-1 xl:col-span-1 hidden lg:block sticky top-32">
-          <TireFilters />
-        </aside>
-        
-        {/* Main Content */}
-        <div className="lg:col-span-3 xl:col-span-4">
-          <TireCatalog />
+        {/* ── Breadcrumbs ── */}
+        <nav className="flex items-center gap-2 text-[11px] font-bold tracking-wider uppercase text-slate-500 mb-6">
+          <Link href="/" className="hover:text-cyan-500 transition-colors">Главная</Link>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-slate-900 dark:text-white">Шины</span>
+        </nav>
+
+        {/* ── Heading ── */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+            Каталог шин
+          </h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-lg">
+            Умный агрегатор предложений. Находите лучшие цены от проверенных поставщиков с учётом доставки.
+          </p>
+        </div>
+
+        {/* ── Size Sliders ── */}
+        <div className="mb-8">
+          <TireSizeTopBar />
+        </div>
+
+        {/* ── Layout: sidebar + catalog ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[280px_1fr] gap-6 items-start">
+
+          {/* Sidebar */}
+          <aside className="hidden lg:block sticky top-28">
+            <TireFilters />
+          </aside>
+
+          {/* Main catalog */}
+          <div>
+            <TireCatalog />
+          </div>
         </div>
 
       </div>
-      
-      {/* Decorative Glows */}
-      <div className="fixed top-0 left-0 w-full h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none -z-10 translate-y-[-50%]"></div>
+
+      {/* Decorative glow */}
+      <div className="fixed top-0 left-0 w-full h-[500px] bg-cyan-500/5 dark:bg-cyan-500/8 blur-[120px] rounded-full pointer-events-none -z-10 -translate-y-1/2" />
     </main>
   );
 }

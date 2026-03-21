@@ -20,15 +20,19 @@ import {
 import { cn } from "@/lib/utils"
 import { Icon } from "@iconify/react";
 
+import { useRouter } from "next/navigation";
+
 const MENU_ITEMS = {
   status: [
     { value: "focus", icon: "solar:emoji-funny-circle-line-duotone", label: "Режим фокуса" },
     { value: "offline", icon: "solar:moon-sleep-line-duotone", label: "Не в сети" }
   ],
+  admin: [
+    { icon: "solar:shield-warning-bold-duotone", label: "Админка", href: "/admin", iconClass: "text-purple-500 dark:text-purple-400 font-bold" }
+  ],
   profile: [
     { icon: "solar:user-circle-line-duotone", label: "Мой профиль", action: "profile" },
-    { icon: "solar:sun-line-duotone", label: "Оформление", action: "appearance" },
-    { icon: "solar:settings-line-duotone", label: "Настройки", action: "settings" },
+    { icon: "solar:tag-price-bold-duotone", label: "Мои объявления", href: "/listings", iconClass: "text-blue-500 dark:text-blue-400" },
     { icon: "solar:bell-line-duotone", label: "Уведомления", action: "notifications" }
   ],
   premium: [
@@ -39,16 +43,10 @@ const MENU_ITEMS = {
       iconClass: "text-amber-600",
       badge: { text: "Скидка 20%", className: "bg-amber-600 text-white text-[11px] border-none" }
     },
-    { icon: "solar:gift-line-duotone", label: "Реферальная программа", action: "referrals" }
+    { icon: "solar:gift-line-duotone", label: "Партнерская программа", href: "/partner", iconClass: "text-emerald-600 dark:text-emerald-400" }
   ],
   support: [
     { icon: "solar:download-line-duotone", label: "Скачать приложение", action: "download" },
-    { 
-      icon: "solar:letter-unread-line-duotone", 
-      label: "Что нового?", 
-      action: "whats-new",
-      rightIcon: "solar:square-top-down-line-duotone"
-    },
     { 
       icon: "solar:question-circle-line-duotone", 
       label: "Техподдержка", 
@@ -57,12 +55,6 @@ const MENU_ITEMS = {
     }
   ],
   account: [
-    { 
-      icon: "solar:users-group-rounded-bold-duotone", 
-      label: "Сменить аккаунт", 
-      action: "switch",
-      showAvatar: false
-    },
     { icon: "solar:logout-2-bold-duotone", label: "Выйти", action: "logout" }
   ]
 };
@@ -81,11 +73,21 @@ export const UserDropdown = ({
   promoDiscount = "Скидка 20%",
   accounts = []
 }) => {
+  const router = useRouter();
+
+  const handleAction = (item: any) => {
+    if (item.href) {
+      router.push(item.href);
+    } else {
+      onAction(item.action);
+    }
+  };
+
   const renderMenuItem = (item: any, index: number) => (
     <DropdownMenuItem 
       key={index}
       className={cn(item.badge || item.showAvatar || item.rightIcon ? "justify-between" : "", "p-2 rounded-lg cursor-pointer hover:bg-slate-100 dark:hover:bg-white/10")}
-      onClick={() => onAction(item.action)}
+      onClick={() => handleAction(item)}
     >
       <span className="flex items-center gap-1.5 font-medium">
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -151,31 +153,16 @@ export const UserDropdown = ({
             </Badge>
           </div>
 
-          <DropdownMenuGroup>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger className="cursor-pointer p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10">
-                <span className="flex items-center gap-1.5 font-medium text-slate-600 dark:text-slate-300">
-                  <Icon icon="solar:smile-circle-line-duotone" className="size-5 text-slate-500 dark:text-slate-400" />
-                  Установить статус
-                </span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent className="bg-white dark:bg-slate-900/95 backdrop-blur-lg border border-slate-200 dark:border-slate-800 mt-2 shadow-lg rounded-xl min-w-[160px]">
-                  <DropdownMenuRadioGroup value={selectedStatus} onValueChange={onStatusChange}>
-                    {MENU_ITEMS.status.map((status, index) => (
-                      <DropdownMenuRadioItem className="gap-2 cursor-pointer hover:bg-slate-100 dark:hover:bg-white/10 rounded-md my-0.5 p-2" key={index} value={status.value}>
-                        <Icon icon={status.icon} className="size-5 text-slate-500 dark:text-slate-400" />
-                        <span className="text-sm font-medium">{status.label}</span>
-                      </DropdownMenuRadioItem>
-                    ))}
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-          </DropdownMenuGroup>
+
         </section>
 
         <section className="p-1">
+          <DropdownMenuGroup>
+            {MENU_ITEMS.admin.map(renderMenuItem)}
+          </DropdownMenuGroup>
+
+          <DropdownMenuSeparator className="bg-slate-100 dark:bg-slate-800/50 my-1 -mx-1" />
+
           <DropdownMenuGroup>
             {MENU_ITEMS.profile.map(renderMenuItem)}
           </DropdownMenuGroup>

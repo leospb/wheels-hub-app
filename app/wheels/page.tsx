@@ -15,7 +15,7 @@ export default function WheelsPage() {
         <div className="absolute top-1/3 right-1/4 w-[40vw] h-[40vh] bg-cyan-500/5 dark:bg-cyan-500/5 blur-[100px] rounded-full mix-blend-screen"></div>
       </div>
 
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 md:mt-24 space-y-8">
+      <main className="relative z-10 w-full md:w-[calc(100%-2rem)] max-w-screen-2xl mx-auto px-4 md:px-0 mt-12 md:mt-24 space-y-8">
         
         {/* ── Page Header ── */}
         <div className="flex flex-col gap-2">

@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import WheelCard from './WheelCard';
-import { LayoutGrid, List } from 'lucide-react';
+import WheelCard, { WheelProduct } from './WheelCard';
+import { LayoutGrid, List, ChevronDown } from 'lucide-react';
 
-const mockWheels = [
+const mockWheels: WheelProduct[] = [
   {
     id: 1,
     brand: 'Vossen',
@@ -64,43 +64,45 @@ const mockWheels = [
   },
 ];
 
+const SORT_OPTIONS = ['По популярности', 'Сначала дешевые', 'Сначала дорогие', 'Высокий рейтинг'];
+
 export default function WheelCatalog() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [sort, setSort] = useState(SORT_OPTIONS[0]);
 
   return (
-    <div className="w-full flex flex-col gap-6">
-      
-      {/* ── Тулбар управления (Сортировка и Вид) ── */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/50 dark:bg-[#0f172a]/50 backdrop-blur-md p-2 pl-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-        
-        <div className="text-sm font-medium text-slate-500">
-          Найдено <span className="font-bold text-slate-900 dark:text-white">420</span> моделей
-        </div>
+    <div className="flex flex-col gap-5 w-full">
+      {/* ── Toolbar ── */}
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+          Найдено <span className="text-slate-900 dark:text-white">420</span> моделей
+        </p>
 
-        <div className="flex items-center gap-4 w-full sm:w-auto">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-400 uppercase">Сортировка:</span>
-            <select className="bg-transparent text-sm font-bold text-slate-900 dark:text-white outline-none cursor-pointer">
-              <option>Сначала популярные</option>
-              <option>Сначала дешевые</option>
-              <option>Сначала дорогие</option>
-              <option>Высокий рейтинг</option>
+        <div className="flex items-center gap-2">
+          {/* Sort dropdown */}
+          <div className="relative hidden sm:block">
+            <select
+              value={sort}
+              onChange={e => setSort(e.target.value)}
+              className="appearance-none pl-3 pr-8 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 cursor-pointer"
+            >
+              {SORT_OPTIONS.map(o => <option key={o}>{o}</option>)}
             </select>
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
           </div>
-          
-          <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700"></div>
 
-          <div className="bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl flex">
-            <button 
+          {/* View toggle */}
+          <div className="flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-1">
+            <button
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-slate-700 text-blue-500 shadow-sm' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'}`}
-              title="Сетка"
+              className={`p-1.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'}`}
+              title="Плитка"
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
-            <button 
+            <button
               onClick={() => setViewMode('list')}
-              className={`p-1.5 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 text-blue-500 shadow-sm' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'}`}
+              className={`p-1.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'}`}
               title="Список"
             >
               <List className="w-4 h-4" />
@@ -109,24 +111,27 @@ export default function WheelCatalog() {
         </div>
       </div>
 
-      {/* ── Сетка товаров ── */}
-      <div className={
-        viewMode === 'grid' 
-          ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
-          : "flex flex-col gap-6"
-      }>
-        {mockWheels.map(wheel => (
-          <WheelCard key={wheel.id} viewMode={viewMode} wheel={wheel} />
-        ))}
-      </div>
+      {/* ── Cards ── */}
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {mockWheels.map(wheel => (
+             <WheelCard key={wheel.id} viewMode="grid" wheel={wheel} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {mockWheels.map(wheel => (
+             <WheelCard key={wheel.id} viewMode="list" wheel={wheel} />
+          ))}
+        </div>
+      )}
 
-      {/* ── Пагинация (Mock) ── */}
-      <div className="flex justify-center mt-8">
-        <button className="px-8 py-3 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 text-slate-600 dark:text-slate-400 font-bold text-sm transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/20">
-          Показать еще 20 товаров
+      {/* ── Load more ── */}
+      <div className="flex justify-center mt-2">
+        <button className="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 transition-colors shadow-sm">
+          Показать ещё 20 моделей
         </button>
       </div>
-
     </div>
   );
 }
